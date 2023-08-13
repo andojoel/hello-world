@@ -2,12 +2,12 @@ pipeline{
 
     agent any
 
-    stages{
+    stages {
 
         stage("build") {
 
             steps {
-                ECHO 'Building the app'
+                echo 'Building the app...'
             }
 
         }
@@ -15,7 +15,7 @@ pipeline{
         stage("test") {
 
             steps {
-                ECHO 'Testing the app'
+                echo 'Testing the app...'
             }
 
         }
@@ -23,7 +23,7 @@ pipeline{
         stage("deploy") {
 
             steps {
-                ECHO 'Deploying the app'
+                echo 'Deploying the app...'
             }
 
         }
