@@ -1,11 +1,11 @@
 pipeline {
   agent any
   stages {
-    stage('Hello') {
+    stage('Pull changes') {
       steps {
-        sh 'cd /home/admin/Projects/test/hello-world'
-        sh 'pwd'
-        sh 'echo "Hello World"'
+        cd /home/admin/Projects/test/hello-world
+        git pul
+        echo "Git pulled"
       }
     }
   }
