@@ -1,23 +1,16 @@
-# Learn about building .NET container images:
-# https://github.com/dotnet/dotnet-docker/blob/main/samples/README.md
-FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:8.0-alpine AS build
-ARG TARGETARCH
-WORKDIR /source
+FROM -mcr.microsoft.com/dotnet/sdk:8.0 AS build-env
+WORKDIR /app
+EXPOSE 80
+EXPOSE 443
 
-# copy csproj and restore as distinct layers
-COPY *.csproj .
-RUN dotnet restore -a $TARGETARCH
+COPY *.csproj ./
+RUN dotnet restore
 
-# copy and publish app and libraries
-COPY . .
-RUN dotnet publish -a $TARGETARCH --no-restore -o /app
+COPY . ./
+RUN dotnet publish -c Release -o out
 
-FROM mcr.microsoft.com/dotnet/runtime:8.0-alpine
+FROM -mcr.microsoft.com/dotnet/sdk:8.0 AS final-env
+WORKDIR /app
+COPY --from=build-env /app/out  .
 
-WORKDIR /app/
-
-COPY --from=build /app .
-
-USER $APP_UID
-
-ENTRYPOINT ["./dotnetapp"]
+ENTRYPOINT [ "dotnet", "webapi-hello-world.dll" ]
