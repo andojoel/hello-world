@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "AjqWvQL9YBwG+D/viYB8QfacORR/NrEx8I+JlcpB2o4=",
+  "Source": "webapi-hello-world",
+  "BasePath": "_content/webapi-hello-world",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
